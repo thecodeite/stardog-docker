@@ -21,7 +21,7 @@ WORKDIR /${STARDOG_VER}
 EXPOSE 5820
 
 CMD if [ ! -f $STARDOG_HOME/stardog-license-key.bin ]; then wget -O $STARDOG_HOME/stardog-license-key.bin $STARDOG_LICENSE; fi && \
-    trap './bin/stardog-admin server stop' TERM && \
+    trap 'killall java' TERM && \
     ./bin/stardog-admin server start && \
     sleep 1 && \
     (tail -f $STARDOG_HOME/stardog.log &) && \
